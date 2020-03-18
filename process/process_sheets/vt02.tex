@@ -1,0 +1,101 @@
+\documentclass[]{article}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{multicol}
+
+\geometry{textwidth = 17cm,textheight = 24cm}
+
+\begin{document}
+
+%-------------------- begin header -------------------%
+\centerline{\LARGE Process sheet for \textbf{vt02}}
+\vspace{0.5em}
+\centerline{\Large Physics and Hardware for Intelligence project}
+\vspace{0.5em}
+\centerline{\large Physical Measurement Laboratory, NIST Boulder}
+\vspace{0.5em}
+\centerline{Dated \today}
+%-------------------- end header ---------------------%
+
+\begin{figure}[!h]
+\centering
+\setlength{\fboxsep}{0pt}%
+\setlength{\fboxrule}{0pt}%
+\fbox{\includegraphics[width=3cm]{votan_white.png}}
+%\caption*{Votan, the Mayan god of optical to electrical transduction.}
+\end{figure}
+
+\begin{abstract}
+\input{sec__summary}
+\vspace{1em}
+\end{abstract}
+
+\begin{multicols}{2}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{4}
+\tableofcontents
+\end{multicols}
+\newpage
+
+\section{\label{sec:pm}PM (alignment marks)}
+\input{sec__pm}
+
+\section{\label{sec:m1}M1 (lower Nb wiring)}
+\input{sec__m1}
+
+\section{\label{sec:stf}STF (superconducting thin film)}
+\input{sec__stf}
+
+\section{\label{sec:r1}R1 (Au resistors)}
+\input{sec__r1}
+
+\section{\label{sec:i1}I1 (first insulator layer)}
+\input{sec__i1}
+
+\section{\label{sec:v1}V1 (via from M1 to M2)}
+\input{sec__v1}
+
+\section{\label{sec:m2}M2 (Nb ground plane)}
+\input{sec__m2}
+
+\section{\label{sec:i2}I2 (second insulator layer)}
+\input{sec__i2}
+
+\section{\label{sec:v2}V2 (via from M2 to JJ1)}
+\input{sec__v2}
+
+\section{\label{sec:tri}Tri-layer dep}
+\input{sec__tri}
+
+\section{\label{sec:jj2}JJ2 (etch upper JJ layer)}
+\input{sec__jj2}
+
+\section{\label{sec:jj1}JJ1 (etch lower JJ layer)}
+\input{sec__jj1}
+
+\section{\label{sec:i3}I3 (third insulator layer)}
+\input{sec__i3}
+
+\section{\label{sec:v3}V3 (via from JJ1/JJ2 to M3)}
+\input{sec__v3}
+
+\section{\label{sec:m3}M3 (upper Nb wiring)}
+\input{sec__m3}
+
+\section{\label{sec:r2}R2 (Au resistors)}
+\input{sec__r2}
+
+\section{\label{sec:i4}I4 (fourth insulator layer)}
+\input{sec__i4}
+
+\section{\label{sec:v4}V4 (via to R2/pad opening)}
+\input{sec__v4}
+
+\section{\label{sec:pkg}PKG (SU8 fiber collars/glue boxes)}
+\input{sec__pkg}
+
+\end{document}

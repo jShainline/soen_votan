@@ -1,0 +1,22 @@
+InductEx v4.30 Free (14 March 2015). Copyright 2003-2015 Coenrad Fourie
+squid.gds -l washer.ldf -i washer.inp -fh 
+Spice netlist squid.cir read. Totals: L = 1, k = 0, P = 1.
+GDS file squid.gds read: db units in 1E-0009 m, 0.001 units per user unit.
+1 structures read. Reduced 3 objects to 2 polygons and 2 terminals.
+Techfile washer.ldf read: Units in 1E-0006 m. AbsMin=0.01 GapMax=2.51
+DIAG preconditioner.
+FastHenry version 3.1wr+su64 found.
+Total unique loops identified in netlist = 1
+Terminal blocks = 2; Labels = 2; Extracted Ports = 1
+
+Port                  Positive terminal    Negative terminal
+P1                    WASHER,polygon;      WASHER,polygon.
+Minimum filaments in FastHenry = 3393
+
+Impedance   Inductance [pH]     Resistance [Ohm]  AbsDiff   PercDiff
+Name      Design    Extracted Design    Extracted (L only)  (L only)
+L1        26.0000   3.29763   --        --        -22.702   -87.32%
+Deallocating memory.
+Cycles found in 0.007 seconds.
+SVD solution in 0.011 seconds.
+Job finished in 2.409 seconds.

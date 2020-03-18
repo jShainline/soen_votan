@@ -1,0 +1,754 @@
+# update from xic 4.3.5 LinuxRHEL6 x86_64 07/16/2018 16:24 GMT
+Comment Northrop Grumman  design rules ### revision 8/1/97 by PDD
+
+
+# original !Set lines
+# !Set LayerTable compact
+# !Set LogoPretty
+
+# current !Set variable status
+!Set LayerTable compact
+!Set LogoPretty
+
+
+Path ( . /usr/local/lib/xictools/xic/cells )
+LibPath ( . /usr/local/lib/xictools/xic/startup )
+HelpPath ( /usr/local/lib/xictools/xic/help )
+ScriptPath ( /usr/local/lib/xictools/xic/scripts . )
+
+DefineLayer      TERM                   300
+DefineLayer      INIT                   301
+DefineLayer      M1                     302
+DefineLayer      JJ                     303
+DefineLayer      dJJ                    304
+DefineLayer      M3                     305
+DefineLayer      DM0                    306
+DefineLayer      I1                     307
+DefineLayer      M2                     308
+DefineLayer      RS                     309
+DefineLayer      I0                     310
+DefineLayer      M0                     311
+DefineLayer      I2                     312
+DefineLayer      PADS                   313
+DefineLayer      SP                     314
+DefineLayer      DICE                   315
+DefineLayer      DI0M1                  316
+
+#------------------------------------------------------------------------------
+# Electrical Layers
+
+ElecLayer SCED
+StreamIn 51, 0
+StreamOut 1 0
+StreamOut 51 0
+RGB 225 225 225
+Filled y
+
+ElecLayer ETC1
+StreamIn 52, 0
+StreamOut 2 0
+StreamOut 52 0
+RGB 125 225 225
+Filled n
+
+ElecLayer ETC2
+StreamIn 53, 0
+StreamOut 3 0
+StreamOut 53 0
+RGB 225 225 125
+Filled n
+
+ElecLayer NAME
+StreamIn 54, 0
+StreamOut 4 0
+StreamOut 54 0
+RGB 255 230 175
+Filled n
+
+ElecLayer MODL
+StreamIn 55, 0
+StreamOut 5 0
+StreamOut 55 0
+RGB 175 225 175
+Filled n
+
+ElecLayer VALU
+StreamIn 56, 0
+StreamOut 6 0
+StreamOut 56 0
+RGB 255 225 225
+Filled n
+
+ElecLayer PARM
+StreamOut 7 0
+RGB 200 175 225
+Filled n
+
+ElecLayer NODE
+StreamOut 8 0
+RGB 255 255 225
+Filled n
+
+ElecLayer SPTX
+StreamOut 10 0
+RGB 225 134 170
+Filled n
+
+ElecLayer TERM
+StreamOut 9 0
+RGB 225 225 225
+Filled n
+Invisible
+
+ElecLayer INIT
+StreamIn 57, 0
+StreamOut 57 0
+RGB 200 175 225
+Filled n
+
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Physical Layers
+
+PhysLayer M0
+StreamIn 8, 0-255
+StreamOut 8 0
+RGB 0 200 60
+Filled \
+  |.               |  (0x1) \
+  | .              |  (0x2) \
+  |  .             |  (0x4) \
+  |   .            |  (0x8) \
+  |    .           |  (0x10) \
+  |     .          |  (0x20) \
+  |      .         |  (0x40) \
+  |       .        |  (0x80) \
+  |        .       |  (0x100) \
+  |         .      |  (0x200) \
+  |          .     |  (0x400) \
+  |           .    |  (0x800) \
+  |            .   |  (0x1000) \
+  |             .  |  (0x2000) \
+  |              . |  (0x4000) \
+  |               .|  (0x8000) outline
+WireWidth 20.0000
+Conductor
+Thickness 0.2000
+MinWidth 0.5000 Diagonal 0.5000 0.5 um M0 min width
+MinSpace 0.5000 Diagonal 0.5000 SameNet 0.2500 0.5 um min space for M0
+MinNoOverlap I0 0.2500 M0 must overlap I0 by at least 0.25 um
+
+PhysLayer DM0
+StreamIn 81, 0-255
+StreamOut 81 0
+RGB 66 173 0
+Filled \
+  |        |  (0x0) \
+  |.   .   |  (0x11) \
+  |        |  (0x0) \
+  |  .   . |  (0x44) \
+  |        |  (0x0) \
+  |.   .   |  (0x11) \
+  |        |  (0x0) \
+  |  .   . |  (0x44) outline
+
+PhysLayer I0
+StreamIn 7, 0-255
+StreamOut 7 0
+RGB 128 183 49
+Filled \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |.      .|  (0x81) \
+  |.      .|  (0x81) \
+  | ..     |  (0x6) \
+  | ..     |  (0x6) \
+  |        |  (0x0) \
+  |        |  (0x0) outline
+Via M0 M1
+Thickness 0.2000
+Overlap M1 I0 must be covered by M1
+NoOverlap I2 I0 and I2 vias must be staggered
+NoOverlap I1 I0 and I1 vias must be staggered
+MinWidth 0.7500 0.75 um I0 min width
+
+PhysLayer JJ
+StreamIn 12, 0
+StreamOut 12 0
+RGB 255 30 146
+Filled \
+  |     .  |  (0x20) \
+  |    .   |  (0x10) \
+  |       .|  (0x80) \
+  |      . |  (0x40) \
+  | .      |  (0x2) \
+  |.       |  (0x1) \
+  |   .    |  (0x8) \
+  |  .     |  (0x4) outline
+WireWidth 2.0000
+Conductor
+Overlap M2&M1 JJ must overlap both M1 and M2
+NoOverlap I0 JJs can't overlap I0 vias
+MinWidth 0.4000 0.4 um minwidth for JJ
+MinSpace 0.4000 0.4 um min space for JJ
+MinNoOverlap dJJ 0.3500 0.35 um space from via to edge of JJ
+MinNoOverlap M1 0.7500 M1 must cover JJs by 0.75 um
+
+PhysLayer M1
+StreamIn 0, 0
+StreamOut 0 0
+RGB 104 255 255
+Filled \
+  |       .|  (0x80) \
+  |      . |  (0x40) \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |  .     |  (0x4) \
+  | .      |  (0x2) \
+  |.       |  (0x1) outline
+WireWidth 2.5000
+Conductor
+Thickness 0.2500
+Lambda 0.085
+MinWidth 0.4000 0.4 um minwidth for M1
+MinSpace 0.4000 0.4 um min space for M1
+MinNoOverlap I0 0.2500 M1 must cover I0 by at least 0.25 um
+
+PhysLayer RS
+StreamIn 5, 0-255
+StreamOut 5 0
+RGB 255 245 0
+Filled \
+  |   ..   |  (0x18) \
+  |   ..   |  (0x18) \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |   ..   |  (0x18) \
+  |   ..   |  (0x18) outline
+Thickness 0.1200
+AnyOverlap I1 RS must have I1 vias to it
+MinWidth 0.4000 0.4 um minwidth for RS
+MinSpace 0.4000 0.4 um min space for RS
+
+PhysLayer DI0M1
+StreamIn 20, 0-255
+StreamOut 20 0
+RGB 139 105 20
+Filled \
+  |.      .|  (0x81) \
+  | .    . |  (0x42) \
+  |  .  .  |  (0x24) \
+  |   ..   |  (0x18) \
+  |   ..   |  (0x18) \
+  |  .  .  |  (0x24) \
+  | .    . |  (0x42) \
+  |.      .|  (0x81) outline
+
+PhysLayer dJJ
+StreamIn 3, 0-255
+StreamOut 3 0
+RGB 255 0 0
+Filled \
+  |        |  (0x0) \
+  | .   .  |  (0x22) \
+  |        |  (0x0) \
+  |   .   .|  (0x88) \
+  |        |  (0x0) \
+  | .   .  |  (0x22) \
+  |        |  (0x0) \
+  |   .   .|  (0x88) outline
+Via M1 M2 !JJ
+Thickness 0.2500
+EpsRel 4.5
+Overlap JJ&M2 dJJ must overlap both JJ and M2
+NoOverlap Region !JJ M1 No overlap of M1 unless JJ is present
+MinWidth 0.4000 0.4 um minwidth for dJJ
+MinSpace 0.4000 0.4 um min space for dJJ
+
+PhysLayer I1
+StreamIn 43, 0-255
+StreamOut 43 0
+RGB 213 0 255
+Filled \
+  |        |  (0x0) \
+  |  .   . |  (0x44) \
+  |        |  (0x0) \
+  |.   .   |  (0x11) \
+  |        |  (0x0) \
+  |  .   . |  (0x44) \
+  |        |  (0x0) \
+  |.   .   |  (0x11) outline
+Via M1 M2
+Thickness 0.2500
+EpsRel 4.5
+Overlap (M1|RS)&M2 I1 must overlap both (M1|RS) and M2
+NoOverlap JJ I1 can't overlap JJs
+NoOverlap I2 I1 and I2 vias must be staggered
+MinWidth 0.4000 0.4 um minwidth for I1
+MinSpace 0.4000 0.4 um min space for I1
+MinSpaceFrom I2 0.5000 Enclosed 0.5000 I1 and I2 vias must have at least 0.5 um separation
+MinSpaceFrom I0 0.5000 Enclosed 0.5000 I1 and I0 vias must have at least 0.5 um separation
+
+PhysLayer M2
+StreamIn 4, 0
+StreamOut 4 0
+RGB 145 147 255
+Filled \
+  |        |  (0x0) \
+  | .      |  (0x2) \
+  |  .     |  (0x4) \
+  |   .    |  (0x8) \
+  |    .   |  (0x10) \
+  |     .  |  (0x20) \
+  |        |  (0x0) \
+  |        |  (0x0) outline
+WireWidth 5.0000
+Conductor
+Thickness 0.3500
+Lambda 0.085
+MinWidth 0.4000 0.4 um minwidth for M2
+MinSpace 0.4000 0.4 um min space for M2
+
+PhysLayer I2
+StreamIn 9, 0-255
+StreamOut 9 0
+RGB 181 117 150
+Filled \
+  |      . |  (0x40) \
+  |     .  |  (0x20) \
+  |.   .   |  (0x11) \
+  |   .   .|  (0x88) \
+  |  .   . |  (0x44) \
+  | .   .  |  (0x22) \
+  |    .   |  (0x10) \
+  |   .    |  (0x8) outline
+Via M2 M3
+Thickness 0.3500
+EpsRel 4.5
+Overlap M3 I2 must be covered by M3
+Overlap M2 I2 must overlap M2
+MinWidth 0.4000 0.4 um minwidth for I2
+MinSpace 0.4000 0.4 um min space for I2
+MinSpaceFrom RS 1.0000 Don't eat the Nb
+
+PhysLayer M3
+StreamIn 11, 0-255
+StreamOut 11 0
+RGB 56 151 177
+Filled \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |        |  (0x0) \
+  |      . |  (0x40) \
+  |     .  |  (0x20) \
+  |    .   |  (0x10) \
+  |   .    |  (0x8) \
+  |        |  (0x0) outline
+Conductor Exclude LX
+Routing
+Thickness 0.4500
+Lambda 0.09
+
+PhysLayer PADS
+StreamIn 10, 0-255
+StreamOut 10 0
+RGB 197 97 65
+Filled \
+  | .....  |  (0x3e) \
+  |      . |  (0x40) \
+  |  ...  .|  (0x9c) \
+  | .   . .|  (0xa2) \
+  | . . . .|  (0xaa) \
+  | .   . .|  (0xa2) \
+  |  ...  .|  (0x9c) \
+  |.       |  (0x1) outline
+Contact M3
+
+PhysLayer DICE
+StreamIn 19, 0-255
+StreamOut 19 0
+RGB 255 255 0
+Filled \
+  |               .|  (0x8000) \
+  |              . |  (0x4000) \
+  |             .  |  (0x2000) \
+  |            .   |  (0x1000) \
+  |           .    |  (0x800) \
+  |          .     |  (0x400) \
+  |         .      |  (0x200) \
+  |        .       |  (0x100) \
+  |       .        |  (0x80) \
+  |      .         |  (0x40) \
+  |     .          |  (0x20) \
+  |    .           |  (0x10) \
+  |   .            |  (0x8) \
+  |  .             |  (0x4) \
+  | .              |  (0x2) \
+  |.               |  (0x1) outline
+
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Misc. Parameters and Attributes
+
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+SnapGridSpacing 0.0500
+SnapPerGrid 2
+
+# Function Key Assignments
+F1Key box
+F2Key wire
+F3Key polyg
+F4Key label
+F5Key attri
+F6Key cnvrt
+F7Key drc
+F8Key desel
+
+# Grid Register Assignments
+Constrain45 y
+QpathUseConductor y
+DocsDir /usr/local/share/xictools/xic/docs
+DrcInterMaxObjs 25
+DrcMaxErrors 1000
+LogoAltFont 1
+LogoEndStyle 0
+LogoPrettyFont timr24
+PartitionSize 0
+ProgramRoot /usr/local/xictools/xic
+# End of global attributes.
+
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Print Driver Blocks
+
+ElecDefaultDriver postscript_bitmap
+PhysDefaultDriver postscript_line_draw_color
+
+HardCopyDevice postscript_line_draw
+HardCopyCommand xpp
+HardCopyResol 72 75 100 150 200 300 400
+HardCopyDefResol 0
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 7.8
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 23.5
+HardCopyMaxHeight 23.5
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice postscript_line_draw_color
+HardCopyCommand xpp
+HardCopyResol 72 75 100 150 200 300 400
+HardCopyDefResol 0
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 33.25
+HardCopyDefHeight 43.25
+HardCopyDefXoff 0.375
+HardCopyDefYoff 0.375
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 45
+HardCopyMaxHeight 48
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+PhysBackgroundColor 255 255 255
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+PhysLayer M1
+RGB 0 250 255
+Filled \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) outline
+PhysLayer RS
+RGB 255 165 0
+Filled \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) outline
+PhysLayer M2
+RGB 0 0 255
+Filled \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) outline
+Invisible n
+
+HardCopyDevice postscript_bitmap
+HardCopyCommand xpp
+HardCopyResol 300 72 75 100 150 200 400
+HardCopyDefResol 0
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 7.9
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 23.5
+HardCopyMaxHeight 23.5
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice postscript_bitmap_encoded
+HardCopyCommand xpp
+HardCopyResol 72 75 100 150 200 300 400
+HardCopyDefResol 0
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 7.9
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 23.5
+HardCopyMaxHeight 23.5
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice postscript_bitmap_color
+HardCopyCommand xpp
+HardCopyResol 72 75 100 150 200
+HardCopyDefResol 0
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 7.9
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 45
+HardCopyMaxHeight 45
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice postscript_bitmap_color_encoded
+HardCopyCommand xpp
+HardCopyResol 72 75 100 150 200
+HardCopyDefResol 0
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 7.9
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 45
+HardCopyMaxHeight 48
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice hpgl_line_draw_color
+HardCopyCommand xpp
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 7.8
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 23.5
+HardCopyMaxHeight 23.5
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice hp_laser_pcl
+HardCopyCommand xpp
+HardCopyResol 75 100 150 300
+HardCopyDefResol 2
+HardCopyLegend 1
+HardCopyOrient 2
+HardCopyDefWidth 7.8
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 16.5
+HardCopyMaxHeight 16.5
+HardCopyMaxXoff 15
+HardCopyMaxYoff 15
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice xfig_line_draw_color
+HardCopyLegend 0
+HardCopyOrient 2
+HardCopyDefWidth 7.8
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 23.5
+HardCopyMaxHeight 23.5
+HardCopyMaxXoff 22
+HardCopyMaxYoff 22
+GridStyle 0
+Expand -1
+ShowTinyBB n
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+
+HardCopyDevice image
+HardCopyResol 100 200
+HardCopyDefResol 0
+HardCopyLegend 0
+HardCopyOrient 2
+HardCopyDefWidth 7.8
+HardCopyDefHeight 10.3
+HardCopyDefXoff 0.25
+HardCopyDefYoff 0.25
+HardCopyMinWidth 1
+HardCopyMinHeight 1
+HardCopyMinXoff 0
+HardCopyMinYoff 0
+HardCopyMaxWidth 16.5
+HardCopyMaxHeight 16.5
+HardCopyMaxXoff 15
+HardCopyMaxYoff 15
+GridStyle 0
+Expand -1
+ShowTinyBB n
+PhysBackgroundColor 255 255 255
+ElecInstanceNameColor salmon
+ElecCoarseGridColor 255 208 136
+ElecFineGridColor 0 245 249
+PhysLayer M1
+RGB 0 250 255
+Filled \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) outline
+PhysLayer RS
+RGB 255 165 0
+Filled \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) outline
+PhysLayer M2
+RGB 0 0 255
+Filled \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) \
+  | . . . .|  (0xaa) \
+  |. . . . |  (0x55) outline
+Invisible n
+
+#------------------------------------------------------------------------------
+# End of file
+

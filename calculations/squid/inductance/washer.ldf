@@ -1,0 +1,65 @@
+*Layer Definition File for InductEx manual - washer with monolayer process
+*
+$Parameters
+Units             =  1e-6
+CIFUnitsPerMicron =  100
+GapMax            =  2.51
+AbsMin            =  0.01
+ProcessHasGroundPlane = TRUE
+GPOverhang        =  7.5
+GPLayer           =  0
+LastDieLayerOrder =  2
+TermLayer         =  19
+TextLayer         =  18
+HFilaments        =  1
+TerminalInRange   =  1.0
+$End
+*
+* LAYERS
+*
+* GP
+$Layer
+Number     =     0
+Name       =     GP
+Thickness  =     0.2
+Lambda     =     0.039
+Order      =     0
+Mask       =     -1
+Filmtype   =     S
+HFilaments =     1
+Colour     =     135
+$End
+* Gap
+$Layer
+Number     =     1
+Name       =     Gap
+Thickness  =     .2
+Lambda     =     0.039
+Order      =     1
+Mask       =     -1
+Filmtype   =     I
+HFilaments =     1
+Colour     =     135
+$End
+*
+* Washer
+$Layer
+Number     =     2
+Name       =     Washer
+Thickness  =     0.2
+Lambda     =     0.039
+Order      =     2
+Mask       =     1
+Filmtype   =     S
+HFilaments =     1
+Colour     =     135
+$End
+*
+* TERM
+$Layer
+Number     =     19
+Name       =     TERM
+Order      =     3
+Mask       =    -4
+$End
+

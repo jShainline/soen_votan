@@ -1,0 +1,9 @@
+* Title: Netlist for InductEx user manual - washer
+* Author: Coenrad Fourie
+* Last mod: 29 August 2018
+**********************************************************
+* Inductors
+L1     1   0   26
+* Ports
+P1     1   0
+.end

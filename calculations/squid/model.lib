@@ -1,0 +1,9 @@
+SCED spice model library
+
+*for overdamped junctions in squid (beta_c = 0.3)
+.model jjSQUID1 jj(rtype=0, cct=1, vg=2.8m, icrit=1u, cap= 11.5f, vshunt=0.0927mV)
+
+*for near-critically damped (beta_c = 0.95)
+.model jjSFQ1 jj(rtype=0, cct=1, vg=2.8m, icrit=1u, cap= 11.5f, vshunt=0.165mV)
+
+
